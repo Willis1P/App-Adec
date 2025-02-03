@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="login-page">
+    <!-- Background com Gradiente -->
+    <GridLayout class="gradient-background">
+        <!-- Overlay Pattern -->
+        <GridLayout class="pattern-overlay"></GridLayout>
+        
+        <!-- Conteúdo Principal -->
+        <ScrollView>
+            <StackLayout class="content-container">
+                <!-- Logo e Título -->
+                <StackLayout class="title-container fade-in">
+                    <Label text="ADEC" class="church-text" />
+                    <Label text="Uma Igreja Família" class="church-subtitle" />
+                </StackLayout>
+                
+                <!-- Form Container com Efeito de Vidro -->
+                <StackLayout class="form-container glass-effect">
+                    <!-- Mensagem de Erro -->
+                    <Label text="{{ errorMessage }}" 
+                           class="error-message" 
+                           visibility="{{ errorMessage ? 'visible' : 'collapsed' }}" 
+                           textWrap="true" />
+
+                    <!-- Email Field -->
+                    <GridLayout rows="auto" columns="auto, *" class="input-field">
+                        <Label text="{{ icons.email }}" class="fas input-icon" col="0" />
+                        <TextField hint="Email" 
+                                  text="{{ email }}" 
+                                  class="input-text" 
+                                  col="1"
+                                  keyboardType="email"
+                                  autocorrect="false"
+                                  autocapitalizationType="none" />
+                    </GridLayout>
+
+                    <!-- Password Field -->
+                    <GridLayout rows="auto" columns="auto, *, auto" class="input-field">
+                        <Label text="{{ icons.lock }}" class="fas input-icon" col="0" />
+                        <TextField hint="Senha" 
+                                  text="{{ password }}" 
+                                  secure="{{ !isPasswordVisible }}"
+                                  class="input-text" 
+                                  col="1" />
+                        <Label text="{{ isPasswordVisible ? icons.eyeSlash : icons.eye }}" 
+                               class="fas password-toggle" 
+                               tap="{{ togglePasswordVisibility }}"
+                               col="2" />
+                    </GridLayout>
+
+                    <!-- Esqueci minha senha -->
+                    <Label text="Esqueci minha senha" 
+                           class="forgot-password" 
+                           tap="{{ forgotPassword }}" />
+
+                    <!-- Botões -->
+                    <StackLayout class="buttons-container">
+                        <!-- Login Button -->
+                        <Button tap="{{ login }}" 
+                                class="login-button" 
+                                isEnabled="{{ !isLoading && isFormValid }}">
+                            <FormattedString>
+                                <Span text="{{ icons.signIn }}" class="fas button-icon" />
+                                <Span text="{{ isLoading ? ' ENTRANDO...' : ' ENTRAR' }}" />
+                            </FormattedString>
+                        </Button>
+
+                        <!-- Register Button -->
+                        <Button tap="{{ register }}" 
+                                class="register-button" 
+                                isEnabled="{{ !isLoading }}">
+                            <FormattedString>
+                                <Span text="{{ icons.userPlus }}" class="fas button-icon" />
+                                <Span text=" CRIAR CONTA" />
+                            </FormattedString>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Versão do App -->
+                <Label text="{{ 'Versão ' + version }}" class="version-text" />
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator busy="{{ isLoading }}" class="activity-indicator" />
+    </GridLayout>
+</Page>

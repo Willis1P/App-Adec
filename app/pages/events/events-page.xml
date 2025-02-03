@@ -1,0 +1,37 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Eventos" class="action-bar">
+        <NavigationButton visibility="visible" tap="{{ onBack }}" android.systemIcon="ic_menu_back"/>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *">
+        <!-- Cabeçalho -->
+        <StackLayout row="0" class="header p-4">
+            <Label text="Próximos Eventos" class="h2 text-center" />
+            <Label text="{{ currentDate }}" class="text-center text-muted" />
+        </StackLayout>
+
+        <!-- Lista de Eventos -->
+        <ListView row="1" items="{{ events }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *, auto" class="list-group-item p-3">
+                    <!-- Ícone do Evento -->
+                    <Label col="0" text="&#xf073;" class="fas event-icon" />
+                    
+                    <!-- Detalhes do Evento -->
+                    <StackLayout col="1" class="m-l-15">
+                        <Label text="{{ title }}" class="font-weight-bold" />
+                        <Label text="{{ date }}" class="text-muted" />
+                        <Label text="{{ description }}" textWrap="true" />
+                    </StackLayout>
+                    
+                    <!-- Botão de Ação -->
+                    <Label col="2" text="&#xf054;" class="fas" tap="{{ $parents['ListView'].onEventTap }}" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- Botão Adicionar Evento (visível apenas para admin/pastor) -->
+        <Button row="1" text="+" class="fab-button" tap="{{ onAddEvent }}" 
+                visibility="{{ isAdmin ? 'visible' : 'collapsed' }}" />
+    </GridLayout>
+</Page>

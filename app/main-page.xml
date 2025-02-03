@@ -1,0 +1,70 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page-background">
+    <ActionBar title="ADEC" backgroundColor="#1e3c72" color="white" flat="true" />
+    
+    <GridLayout rows="*, auto">
+        <ScrollView row="0">
+            <StackLayout class="p-6">
+                <Label text="{{ welcomeMessage }}" class="welcome-text text-center mb-8" textWrap="true" />
+                
+                <GridLayout rows="auto, auto" columns="*, *" class="mb-4">
+                    <!-- Menu Items -->
+                    <StackLayout row="0" col="0" class="menu-item" tap="{{ onEventsTab }}">
+                        <Label text="&#xf073;" class="fas menu-icon" horizontalAlignment="center" />
+                        <Label text="Eventos" class="text-center font-medium" />
+                    </StackLayout>
+
+                    <StackLayout row="0" col="1" class="menu-item" tap="{{ onFinanceTab }}">
+                        <Label text="&#xf0d6;" class="fas menu-icon" horizontalAlignment="center" />
+                        <Label text="Finanças" class="text-center font-medium" />
+                    </StackLayout>
+
+                    <StackLayout row="1" col="0" class="menu-item" tap="{{ onMembersTab }}">
+                        <Label text="&#xf0c0;" class="fas menu-icon" horizontalAlignment="center" />
+                        <Label text="Membros" class="text-center font-medium" />
+                    </StackLayout>
+
+                    <StackLayout row="1" col="1" class="menu-item" tap="{{ onAnnouncementsTab }}">
+                        <Label text="&#xf0a1;" class="fas menu-icon" horizontalAlignment="center" />
+                        <Label text="Anúncios" class="text-center font-medium" />
+                    </StackLayout>
+                </GridLayout>
+
+                <!-- Recent Activities -->
+                <StackLayout class="bg-white rounded-lg p-4 elevation-3">
+                    <Label text="Atividades Recentes" class="text-lg font-bold mb-2" />
+                    <ListView items="{{ recentActivities }}" height="200">
+                        <ListView.itemTemplate>
+                            <GridLayout columns="auto, *" class="p-2">
+                                <Label col="0" text="{{ icon }}" class="fas menu-icon mr-2" />
+                                <Label col="1" text="{{ description }}" textWrap="true" />
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <GridLayout row="1" columns="*, *, *, *" class="bottom-nav p-2">
+            <StackLayout col="0" tap="{{ onHomeTab }}" class="bottom-nav-item active">
+                <Label text="&#xf015;" class="fas menu-icon" horizontalAlignment="center" />
+                <Label text="Home" class="text-center" />
+            </StackLayout>
+
+            <StackLayout col="1" tap="{{ onProfileTab }}" class="bottom-nav-item">
+                <Label text="&#xf007;" class="fas menu-icon" horizontalAlignment="center" />
+                <Label text="Perfil" class="text-center" />
+            </StackLayout>
+
+            <StackLayout col="2" tap="{{ onGroupsTab }}" class="bottom-nav-item">
+                <Label text="&#xf0c0;" class="fas menu-icon" horizontalAlignment="center" />
+                <Label text="Grupos" class="text-center" />
+            </StackLayout>
+
+            <StackLayout col="3" tap="{{ onSettingsTab }}" class="bottom-nav-item">
+                <Label text="&#xf013;" class="fas menu-icon" horizontalAlignment="center" />
+                <Label text="Config" class="text-center" />
+            </StackLayout>
+        </GridLayout>
+    </GridLayout>
+</Page>

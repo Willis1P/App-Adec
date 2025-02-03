@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="login-page">
+    <GridLayout class="gradient-background">
+        <!-- Overlay Pattern -->
+        <GridLayout class="pattern-overlay"></GridLayout>
+        
+        <!-- Conteúdo Principal -->
+        <ScrollView>
+            <StackLayout class="content-container">
+                <!-- Cabeçalho -->
+                <StackLayout class="title-container fade-in">
+                    <Label text="Criar Conta" class="church-text" />
+                    <Label text="Junte-se à nossa comunidade" class="church-subtitle" />
+                </StackLayout>
+                
+                <!-- Form Container com Efeito de Vidro -->
+                <StackLayout class="form-container glass-effect">
+                    <!-- Mensagem de Erro -->
+                    <Label text="{{ errorMessage }}" 
+                           class="error-message" 
+                           visibility="{{ errorMessage ? 'visible' : 'collapsed' }}" 
+                           textWrap="true" />
+
+                    <!-- Nome Field -->
+                    <GridLayout rows="auto" columns="auto, *" class="input-field">
+                        <Label text="{{ icons.user }}" class="fas input-icon" col="0" />
+                        <TextField hint="Nome completo" 
+                                  text="{{ name }}" 
+                                  class="input-text" 
+                                  col="1"
+                                  autocorrect="false" />
+                    </GridLayout>
+
+                    <!-- Email Field -->
+                    <GridLayout rows="auto" columns="auto, *" class="input-field">
+                        <Label text="&#xf0e0;" class="fas input-icon" col="0" />
+                        <TextField hint="Email" 
+                                  text="{{ email }}" 
+                                  class="input-text" 
+                                  col="1"
+                                  keyboardType="email"
+                                  autocorrect="false"
+                                  autocapitalizationType="none" />
+                    </GridLayout>
+
+                    <!-- Password Field -->
+                    <GridLayout rows="auto" columns="auto, *, auto" class="input-field">
+                        <Label text="{{ icons.lock }}" class="fas input-icon" col="0" />
+                        <TextField hint="Senha" 
+                                  text="{{ password }}" 
+                                  secure="{{ !isPasswordVisible }}"
+                                  class="input-text" 
+                                  col="1" />
+                        <Label text="{{ isPasswordVisible ? icons.eyeSlash : icons.eye }}" 
+                               class="fas password-toggle" 
+                               tap="{{ togglePasswordVisibility }}"
+                               col="2" />
+                    </GridLayout>
+
+                    <!-- Confirm Password Field -->
+                    <GridLayout rows="auto" columns="auto, *, auto" class="input-field">
+                        <Label text="{{ icons.lock }}" class="fas input-icon" col="0" />
+                        <TextField hint="Confirmar Senha" 
+                                  text="{{ confirmPassword }}" 
+                                  secure="{{ !isPasswordVisible }}"
+                                  class="input-text" 
+                                  col="1" />
+                        <Label text="{{ isPasswordVisible ? icons.eyeSlash : icons.eye }}" 
+                               class="fas password-toggle" 
+                               tap="{{ togglePasswordVisibility }}"
+                               col="2" />
+                    </GridLayout>
+
+                    <!-- Botões -->
+                    <StackLayout class="buttons-container">
+                        <!-- Register Button -->
+                        <Button tap="{{ register }}" 
+                                class="login-button" 
+                                isEnabled="{{ !isLoading && isFormValid }}">
+                            <FormattedString>
+                                <Span text="{{ icons.userPlus }}" class="fas button-icon" />
+                                <Span text="{{ isLoading ? ' REGISTRANDO...' : ' CRIAR CONTA' }}" />
+                            </FormattedString>
+                        </Button>
+
+                        <!-- Back to Login Button -->
+                        <Button tap="{{ backToLogin }}" 
+                                class="register-button" 
+                                isEnabled="{{ !isLoading }}">
+                            <FormattedString>
+                                <Span text="&#xf060;" class="fas button-icon" />
+                                <Span text=" VOLTAR" />
+                            </FormattedString>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator busy="{{ isLoading }}" class="activity-indicator" />
+    </GridLayout>
+</Page> 
